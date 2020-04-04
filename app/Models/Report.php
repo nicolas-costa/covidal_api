@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Report extends Model
 {
@@ -26,7 +25,7 @@ class Report extends Model
 
         $reports->each(function($report) use (&$reportData) {
             array_push($reportData['labels'],
-                Str::limit($report->created_at->formatLocalized('%A'), 5));
+                $report->created_at->format('d/m'));
         });
 
         array_push($reportData['legend'],

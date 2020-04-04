@@ -10,12 +10,9 @@ class ReportController extends Controller
 
     public function index(Request $request) {
 
-        $report = Report::orderBy('created_at')
-            ->limit(5)->get();
+        $report = Report::getReports();
 
-        return response()->json([
-            'report' => $report
-        ]);
+        return response()->json($report);
 
     }
 }

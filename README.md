@@ -56,7 +56,7 @@ php -S localhost:8000 -t public
 ## Licence
 WTFPL
 
-##Credits
+## Credits
 Nícolas Costa
 
 

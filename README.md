@@ -53,7 +53,7 @@ Now the project should be ready, run
 php -S localhost:8000 -t public
 ```
 
-## Licence
+## License
 WTFPL
 
 ## Credits

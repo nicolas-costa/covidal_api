@@ -1,17 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
 {
-
     protected $dates = [
-        'created_at', 'updated_at'
+        'created_at', 'updated_at',
     ];
 
-    public static function getReports($dateCount =  5) {
+    public static function getReports($dateCount = 5)
+    {
         $reports = self::orderBy('created_at', 'desc')
             ->limit($dateCount)
             ->get()
@@ -20,30 +22,34 @@ class Report extends Model
         $reportData = [
             'legend' => [],
             'labels' => [],
-            'datasets' => []
+            'datasets' => [],
         ];
 
-        $reports->each(function($report) use (&$reportData) {
-            array_push($reportData['labels'],
-                $report->created_at->format('d/m'));
+        $reports->each(function ($report) use (&$reportData): void {
+            array_push(
+                $reportData['labels'],
+                $report->created_at->format('d/m')
+            );
         });
 
-        array_push($reportData['legend'],
+        array_push(
+            $reportData['legend'],
             'Notif.',
             'Susp.',
             'Descar.',
             'Confir.',
-            'Mortes');
+            'Mortes'
+        );
 
-        array_push($reportData['datasets'],
+        array_push(
+            $reportData['datasets'],
             ['data' => $reports->pluck('notified')],
             ['data' => $reports->pluck('suspicious')],
             ['data' => $reports->pluck('discarded')],
             ['data' => $reports->pluck('confirmed')],
-            ['data' => $reports->pluck('deaths')]);
+            ['data' => $reports->pluck('deaths')]
+        );
 
         return $reportData;
-
     }
-
 }

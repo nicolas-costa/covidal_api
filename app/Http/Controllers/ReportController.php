@@ -9,10 +9,19 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
+    private $report;
+
+    public function __construct(Report $report)
+    {
+        $this->report = $report;
+    }
+
     public function index(Request $request)
     {
-        $report = Report::getReports();
+        $reports = $this
+            ->report
+            ->getReports();
 
-        return response()->json($report);
+        return response()->json($reports);
     }
 }
